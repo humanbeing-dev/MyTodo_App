@@ -1,0 +1,4 @@
+.todo_complete {
+    text-decoration: line-through;
+    background-color: #bbbbbb;
+}

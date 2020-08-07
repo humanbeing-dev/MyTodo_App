@@ -1,0 +1,22 @@
+{% extends 'todo/layout.html' %}
+
+{% block content %}
+      <form method='POST' action='{% url 'save' id %}' class="form-inline mb-4">
+        {% csrf_token %}
+
+        <div class="input-group">
+            <div class="form-row">
+                <div class="col">
+                    <input type="text" class="form-control" name="task" value="{{ task }}">
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" name="project" value="{{ project }}">
+                </div>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Edytuj</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+{% endblock content %}

@@ -1,0 +1,68 @@
+{% extends 'todo/layout.html' %}
+
+{% block content %}
+
+      <form method='POST' action='{% url 'add' %}' class="form-inline mb-4">
+        {% csrf_token %}
+
+        <div class="input-group">
+            <div class="form-row">
+                <div class="col">
+                    <input type="text" class="form-control" name="task" placeholder="Zadanie">
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" name="project" placeholder="Projekt">
+                </div>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Dodaj</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="btn-group mb-4" role="group" aria-label="Basic example">
+        <a href="{% url 'delete_completed' %}"><button type="button" class="btn btn-warning mr-2">Usuń wykonane</button></a>
+        <a href="{% url 'delete_all' %}"><button type="button" class="btn btn-warning">Usuń wszystkie</button></a>
+    </div>
+
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <th scope="col" class="col-1">#</th>
+                <th scope="col" class="col-3">Projekt</th>
+                <th scope="col" class="col-6">Zadanie</th>
+                <th scope="col" class="col-1">Status</th>
+                <th scope="col" class="col-1">Usuń</th>
+            </tr>
+        </thead>
+
+        {% for task in tasks %}
+        <tbody>
+            <tr>
+                {% if task.complete %}
+                    <th class="todo_complete" scope="row">{{ forloop.counter }}</th>
+                    <td class="todo_complete">{{ task.project }}</td>
+                    <td class="todo_complete">{{ task.task }}</td>
+                    <td class="todo_complete">
+                        <a href="{% url 'uncompleted' task.id %}"><button type="button" class="btn btn-warning btn-sm">Undone</button></a>
+                    </td>
+                    <td class="todo_complete">
+                        <a href="{% url 'delete_one' task.id %}"><button type="button" class="btn btn-warning btn-sm">Usuń</button></a>
+                    </td>
+                {% else %}
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ task.project }}</td>
+                        <td><a href="{% url 'edit' task.id %}">{{ task.task }}</a></td>
+                        <td>
+                            <a href="{% url 'completed' task.id %}"><button type="button" class="btn btn-warning btn-sm">Done</button></a>
+                        </td>
+                        <td>
+                            <a href="{% url 'delete_one' task.id %}"><button type="button" class="btn btn-warning btn-sm">Usuń</button></a>
+                        </td>
+                {% endif %}
+            </tr>
+        </tbody>
+        {% endfor %}
+
+    </table>
+{% endblock content %}
