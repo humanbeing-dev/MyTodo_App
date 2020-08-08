@@ -17,7 +17,9 @@
         <thead>
             <tr>
                 <th scope="col" class="col-1">#</th>
-                <th scope="col" class="col-11">Project</th>
+                <th scope="col" class="col-9">Project</th>
+                <th scope="col" class="col-1">Done</th>
+                <th scope="col" class="col-1">To do</th>
             </tr>
         </thead>
 
@@ -25,13 +27,13 @@
         <tbody>
             <tr>
                 <th scope="row">{{ forloop.counter }}</th>
-                <td>{{ project }}</td>
+                <td>{{ project.names }}</td>
+                <td>{{ project.done }}</td>
+                <td>{{ project.undone }}</td>
             </tr>
         </tbody>
         {% endfor %}
 
     </table>
-
-
 
 {% endblock content %}

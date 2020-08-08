@@ -21,6 +21,12 @@ def register(request):
 
 @login_required
 def profile(request):
-    projects = list({task['project'] for task in Todo.objects.all().values()})
-    print(projects)
+    names = list({task['project'] for task in Todo.objects.all().values()})
+    done = [task['project'] for task in Todo.objects.all().values() if task['complete']]
+    undone = [task['project'] for task in Todo.objects.all().values() if not task['complete']]
+
+    projects = []
+    for name in names:
+        projects.append({'names': name, 'done': done.count(name), 'undone': undone.count(name)})
+
     return render(request, 'user/profile.html', context={'projects': projects})
