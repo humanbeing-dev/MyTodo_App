@@ -1,0 +1,37 @@
+{% extends 'todo/layout.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">User: {{ user }}</li>
+        </ol>
+    </nav>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Your projects:</li>
+        </ol>
+    </nav>
+
+    <table class="table table-hover table-bordered" id="myTable">
+        <thead>
+            <tr>
+                <th scope="col" class="col-1">#</th>
+                <th scope="col" class="col-11">Project</th>
+            </tr>
+        </thead>
+
+        {% for project in projects %}
+        <tbody>
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ project }}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+
+    </table>
+
+
+
+{% endblock content %}

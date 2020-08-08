@@ -16,27 +16,11 @@ def add_task(request):
     form = TodoForm(request.POST or None)
 
     task = request.POST['task']
+    story = request.POST['story']
     project = request.POST['project']
-    Todo.objects.create(task=task, project=project)
+    Todo.objects.create(task=task, story=story, project=project)
 
     return redirect('home')
-
-# def add_task(request):
-#     if request.method == "POST":
-#         form = TodoForm(request.POST or None)
-#
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, ('Item has been added to list!'))
-#             return redirect('home')
-#
-#     else:
-#         context = {'tasks': Todo.objects.all().order_by('-id')}
-#         return render(request, 'todo/home.html', context)
-
-
-#
-
 
 
 def completed_task(request, todo_id):
@@ -76,13 +60,14 @@ def delete_one(request, todo_id):
 
 def edit(request, todo_id):
     todo = Todo.objects.get(pk=todo_id)
-    context = {'task': todo.task, 'project': todo.project, 'id': todo.id}
+    context = {'task': todo.task, 'story': todo.story, 'project': todo.project, 'id': todo.id}
     return render(request, 'todo/edit.html', context)
 
 
 def save(request, todo_id):
     todo = Todo.objects.get(pk=todo_id)
     todo.task = request.POST['task']
+    todo.story = request.POST['story']
     todo.project = request.POST['project']
     todo.save()
 

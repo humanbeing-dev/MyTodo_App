@@ -1,4 +1,44 @@
 .todo_complete {
     text-decoration: line-through;
-    background-color: #bbbbbb;
+    background-color: #888888;
+}
+
+.breadcrumb {
+    color: #666666;
+}
+
+.pomodoro_all {
+    border: 1px solid #666666;
+    border-radius: 3px;
+    width: 1110px;
+    text-align: center;
+    padding: 5px;
+    height: 50px;
+}
+
+.pomodoro-margins {
+    float: left;
+    width: 200px;
+}
+
+.pomodoro {
+    float: left;
+    width: 695px;
+    font-size: 25px;
+}
+
+.auth {
+    text-align: center;
+    width: 150px;
+    float: right;
+    color: #ffffff;
+}
+
+.auth > a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.authbar {
+    width: 450px;
 }
