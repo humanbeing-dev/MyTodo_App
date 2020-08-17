@@ -3,11 +3,6 @@
 
 {% block content %}
 
-    <legend>Logowanie</legend>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <button type="submit">Submit</button>
-    </form>
+    <legend>Wylogowano pomyślnie</legend>
 
 {% endblock content %}
