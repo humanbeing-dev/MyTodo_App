@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
+    # path('', views.HomeView.as_view(), name='home'),
     path('add/', views.add_task, name='add'),
     path('completed/<todo_id>/', views.completed_task, name='completed'),
     path('uncompleted/<todo_id>/', views.uncompleted_task, name='uncompleted'),
@@ -13,3 +14,5 @@ urlpatterns = [
     path('edit/<todo_id>/', views.edit, name='edit'),
     path('save/<todo_id>/', views.save, name='save'),
 ]
+
+

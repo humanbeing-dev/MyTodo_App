@@ -4,11 +4,21 @@ from django.utils import timezone
 from django.views.decorators.http import require_POST
 from .forms import TodoForm
 from django.contrib import messages
+from django.http import JsonResponse
+from django.views.generic import View
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django.contrib.auth import get_user_model
 
 
 def home(request):
     context = {'tasks': Todo.objects.all().order_by('-id')}
     return render(request, 'todo/home.html', context)
+
+
+# class HomeView(View):
+#     def get(self, request, *args, **kwargs):
+#         return render(request, 'todo/chart.html')
 
 
 @require_POST
@@ -72,3 +82,6 @@ def save(request, todo_id):
     todo.save()
 
     return redirect('home')
+
+
+
