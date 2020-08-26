@@ -90,7 +90,7 @@ DATABASES = {
         'ENGINE': 'sql_server.pyodbc',
         'NAME': 'TasksDB',
         'USER': 'humanbeing@hbtodoapp',
-        'PASSWORD': 'Testing3',
+        'PASSWORD': 'Testing321',
         'HOST': 'tcp:hbtodoapp.database.windows.net',
         'PORT': '1433',
         'OPTIONS': {

@@ -1,7 +1,9 @@
 asgiref==3.2.10
 Django==2.1.15
 django-crispy-forms==1.9.2
+django-pyodbc-azure==2.1.0.0
 djangorestframework==3.11.1
+pyodbc==4.0.30
 python-decouple==3.3
 pytz==2020.1
 sqlparse==0.3.1
