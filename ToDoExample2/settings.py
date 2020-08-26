@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -136,6 +137,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
+
+STATICFILES_STORAGE = 'backend.custom_azure.AzureStaticStorage'
+STATIC_LOCATION = 'static'
+AZURE_ACCOUNT_NAME = 'hbtodostatic'
+AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
+STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}{STATIC_LOCATION}/'
+
+
+# STATICFILES_STORAGE = 'backend.custom_azure.AzureStaticStorage'
+# STATIC_LOCATION = 'static'
+# AZURE_ACCOUNT_NAME = 'pythonexample1'
+# AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}{STATIC_LOCATION}/'
+
+# STATIC_URL = '/static/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'home'
