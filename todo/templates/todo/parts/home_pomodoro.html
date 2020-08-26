@@ -1,0 +1,25 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page" style="width: 947px;">Pomodoro</li>
+        <button type="submit" class="btn btn-outline-info btn-sm mr-2" onclick="element_show(['pomodoro'])">
+            Show Pomodoro
+        </button>
+    </ol>
+
+    <div class="pomodoro_all mb-4" id="pomodoro" style="display: none;">
+        <div class="pomodoro-margins">
+            <div class="col">
+                <input type="text" class="form-control" name="project" placeholder="Project">
+            </div>
+        </div>
+        <div class="pomodoro-container">
+            <div class="pomodoro-timer" id="time">
+                45:00
+            </div>
+        </div>
+        <div class="pomodoro-margins">
+            <button id="btn-pomodoro" class="btn btn-outline-danger" type="submit">Pomodoro!</button>
+            <button class="btn btn-outline-danger" type="submit">Stop!</button>
+        </div>
+    </div>
+</nav>

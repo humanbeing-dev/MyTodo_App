@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Todo
+from .models import Todo, TodoArchive
 from django.utils import timezone
 from django.views.decorators.http import require_POST
 from .forms import TodoForm
@@ -49,7 +49,19 @@ def uncompleted_task(request, todo_id):
     return redirect('home')
 
 
-def delete_completed(request):
+def archive_completed(request):
+    for todo in Todo.objects.all():
+        if todo.complete:
+            archive_todo = TodoArchive(task=todo.task, story=todo.story,
+                                       project=todo.project, complete=todo.complete,
+                                       date_added=todo.date_added)
+            archive_todo.save()
+            todo.delete()
+
+    return redirect('home')
+
+
+def delete_completed(request):      
     Todo.objects.filter(complete=True).delete()
 
     return redirect('home')

@@ -1,7 +1,7 @@
 function myFunction(column) {
-    var input, filter, table, tr, td, i, txtValue;
-    input = document.getElementById("byProject");
-    filter = input.value.toUpperCase();
+    let input, filter, table, tr, td, i, txtValue;
+    input = [document.getElementById("byProject"), document.getElementById("byStory")];
+    filter = input[column].value.toUpperCase();
     table = document.getElementById("myTable");
     tr = table.getElementsByTagName("tr");
 

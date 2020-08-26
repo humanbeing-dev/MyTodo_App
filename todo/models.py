@@ -11,3 +11,10 @@ class Todo(models.Model):
 
     def __str__(self):
         return self.task
+
+
+class TodoArchive(Todo):
+    date_archived = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f'ARCH {self.task} - {self.date_added}'
