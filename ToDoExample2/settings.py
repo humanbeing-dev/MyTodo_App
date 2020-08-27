@@ -76,30 +76,35 @@ TEMPLATES = [
 WSGI_APPLICATION = 'ToDoExample2.wsgi.application'
 
 
+server = ['local', 'azure']
+current_server = server[1]
+
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'sql_server.pyodbc',
-        'NAME': 'TasksDB',
-        'USER': 'humanbeing@hbtodoapp',
-        'PASSWORD': 'Testing321',
-        'HOST': 'tcp:hbtodoapp.database.windows.net',
-        'PORT': '1433',
-        'OPTIONS': {
-            'driver': 'ODBC Driver 17 for SQL Server',
-            'connection_timeout': 10
+if current_server == server[0]:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
-}
+
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'sql_server.pyodbc',
+            'NAME': 'TasksDB',
+            'USER': 'humanbeing@hbtodoapp',
+            'PASSWORD': config('PASSWORD'),
+            'HOST': 'tcp:hbtodoapp.database.windows.net',
+            'PORT': '1433',
+            'OPTIONS': {
+                'driver': 'ODBC Driver 17 for SQL Server',
+                'connection_timeout': 10
+            }
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -137,19 +142,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+if current_server == server[0]:
+    STATIC_URL = '/static/'
+else:
+    STATICFILES_STORAGE = 'backend.custom_azure.AzureStaticStorage'
+    STATIC_LOCATION = 'static'
+    AZURE_ACCOUNT_NAME = 'hbtodostatic'
+    AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
+    STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}{STATIC_LOCATION}/'
 
-STATICFILES_STORAGE = 'backend.custom_azure.AzureStaticStorage'
-STATIC_LOCATION = 'static'
-AZURE_ACCOUNT_NAME = 'hbtodostatic'
-AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
-STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}{STATIC_LOCATION}/'
-
-
-# STATICFILES_STORAGE = 'backend.custom_azure.AzureStaticStorage'
-# STATIC_LOCATION = 'static'
-# AZURE_ACCOUNT_NAME = 'pythonexample1'
-# AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}{STATIC_LOCATION}/'
-
-# STATIC_URL = '/static/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'home'
