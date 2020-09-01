@@ -8,13 +8,15 @@ class Todo(models.Model):
     story = models.CharField(max_length=100, default="-")
     project = models.CharField(max_length=100)
     complete = models.BooleanField(default=False)
+    archived = models.BooleanField(default=False)
+    # date_archived = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.task
 
 
-class TodoArchive(Todo):
-    date_archived = models.DateTimeField(default=timezone.now)
-
-    def __str__(self):
-        return f'ARCH {self.task} - {self.date_added}'
+# class TodoArchive(Todo):
+#     date_archived = models.DateTimeField(default=timezone.now)
+#
+#     def __str__(self):
+#         return f'ARCH {self.task} - {self.date_added}'

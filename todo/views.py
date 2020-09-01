@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Todo, TodoArchive
+from .models import Todo
 from django.utils import timezone
 from django.views.decorators.http import require_POST
 from .forms import TodoForm
@@ -12,7 +12,9 @@ from django.contrib.auth import get_user_model
 
 
 def home(request):
-    context = {'tasks': Todo.objects.all().order_by('-id')}
+    print(Todo.objects.filter(archived=True).count())
+    context = {'tasks': Todo.objects.filter(archived=False).order_by('-id')}
+
     return render(request, 'todo/home.html', context)
 
 
@@ -52,11 +54,8 @@ def uncompleted_task(request, todo_id):
 def archive_completed(request):
     for todo in Todo.objects.all():
         if todo.complete:
-            archive_todo = TodoArchive(task=todo.task, story=todo.story,
-                                       project=todo.project, complete=todo.complete,
-                                       date_added=todo.date_added)
-            archive_todo.save()
-            todo.delete()
+            todo.archived = True
+            todo.save()
 
     return redirect('home')
 
