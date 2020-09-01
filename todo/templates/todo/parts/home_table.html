@@ -32,7 +32,7 @@
                 </td>
             {% else %}
                     <th scope="row">{{ forloop.counter }}</th>
-                    <td>{{ task.project }}</td>
+                    <td><a href="{% url 'project' task.id %}">{{ task.project }}</a></td>
                     <td>{{ task.story }}</td>
                     <td><a href="{% url 'edit' task.id %}">{{ task.task }}</a></td>
                     <td>

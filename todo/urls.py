@@ -14,6 +14,7 @@ urlpatterns = [
     path('del_all/', views.delete_all, name='delete_all'),
     path('edit/<todo_id>/', views.edit, name='edit'),
     path('save/<todo_id>/', views.save, name='save'),
+    path('project/<todo_id>/', views.project, name='project'),
 ]
 
 

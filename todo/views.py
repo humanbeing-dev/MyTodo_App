@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render, redirect
 from .models import Todo
 from django.utils import timezone
@@ -11,25 +12,19 @@ from rest_framework.response import Response
 from django.contrib.auth import get_user_model
 
 
+
 def home(request):
-    print(Todo.objects.filter(archived=True).count())
     context = {'tasks': Todo.objects.filter(archived=False).order_by('-id')}
-
     return render(request, 'todo/home.html', context)
-
-
-# class HomeView(View):
-#     def get(self, request, *args, **kwargs):
-#         return render(request, 'todo/chart.html')
 
 
 @require_POST
 def add_task(request):
     form = TodoForm(request.POST or None)
 
-    task = request.POST['task']
-    story = request.POST['story']
-    project = request.POST['project']
+    task = request.POST['new_task']
+    story = request.POST['new_story']
+    project = request.POST['new_project']
     Todo.objects.create(task=task, story=story, project=project)
 
     return redirect('home')
@@ -95,4 +90,11 @@ def save(request, todo_id):
     return redirect('home')
 
 
+def project(request, todo_id):
+    """View with projects and its list of done and undone tasks"""
+    current_project = Todo.objects.get(pk=todo_id).project
+    undone = Todo.objects.filter(Q(project=current_project) & Q(complete=False))
+    done = Todo.objects.filter(Q(project=current_project) & Q(complete=True))
+    context = {'done': done, 'todos': undone}
 
+    return render(request, 'todo/projects.html', context)
