@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'ToDoExample2.wsgi.application'
 
 
 server = ['local', 'azure']
-current_server = server[1]
+current_server = server[0]
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
