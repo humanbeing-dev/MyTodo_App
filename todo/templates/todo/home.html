@@ -4,11 +4,14 @@
 
     {% if user.is_authenticated %}
 
-        {% include 'todo/parts/home_task_managing.html' %}
-        {% include 'todo/parts/home_filtering.html' %}
-        {% include 'todo/parts/home_pomodoro.html' %}
-        {% include 'todo/parts/home_table2.html' %}
-        
+        {% include 'todo/home_parts/home_task_managing.html' %}
+        {% include 'todo/home_parts/home_filtering.html' %}
+        {% include 'todo/home_parts/home_pomodoro.html' %}
+        {% include 'todo/home_parts/home_table.html' %}
+
+        <div class="accordion" id="accordionExample">
+        </div>
+
     {% else %}
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">

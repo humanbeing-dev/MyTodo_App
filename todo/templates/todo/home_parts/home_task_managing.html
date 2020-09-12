@@ -1,0 +1,41 @@
+<div class="card">
+<div class="card-header" id="headingThree">
+  <h2 class="mb-0">
+    <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+      Manage your tasks
+    </button>
+  </h2>
+</div>
+<div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordionExample">
+  <div class="card-body">
+    <form method='POST' action='{% url 'add' %}' class="form-inline mb-4">
+    {% csrf_token %}
+        <div class="input-group">
+            <div class="form-row">
+                <div class="col">
+                    <input type="text" class="form-control" name="new_project" placeholder="Project">
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" name="new_story" placeholder="Story">
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" name="new_task" placeholder="Task">
+                </div>
+
+                <div class="btn-toolbar mb-2" aria-label="First group">
+                    <button class="btn btn-outline-secondary mr-5" type="submit" id="button-addon2">Add</button>
+                </div>
+
+            </div>
+        </div>
+        <div class="form-row">
+            <a href="{% url 'archive_completed' %}"><button type="button" class="btn btn-warning mr-4">Archive completed</button></a>
+            <a href="{% url 'delete_completed' %}"><button type="button" class="btn btn-warning mr-4">Delete completed</button></a>
+            <a href="{% url 'delete_all' %}"><button type="button" class="btn btn-warning mr-2">Delete all tasks</button></a>
+        </div>
+    </form>
+  </div>
+</div>
+</div>
+
+
